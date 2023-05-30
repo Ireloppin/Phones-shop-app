@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import SearchBar from './SearchBar';
+
 
 const Header = () => {
   return (
     <Container>
         <H1>Phone Shop</H1>
-        <SearchBar/>
+        
     </Container>
   )
 }
