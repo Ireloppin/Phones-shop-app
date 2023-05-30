@@ -1,36 +1,24 @@
-import { createContext, useReducer } from "react";
-import {cartReducer, cartInitialState} from '../reducers/cart'
+import React, { createContext, useEffect, useState } from "react";
 
-export const CartContext = createContext()
+export const CartContext = createContext();
 
-function  useCartReducer (){
-    const [state, dispatch]=useReducer(cartReducer, cartInitialState)
+export function CartProvider({ children }) {
+  const cartInitialState = JSON.parse(localStorage.getItem("products")) || [];
 
-    const addToCart = product => dispatch({
-        type: 'ADD_TO_CART',
-        payload:product
-    })
-    const removeFromCart = product => dispatch({
-        type: 'REMOVE_FROM_CART',
-        payload:product
-    })
-    const clearCart = () => dispatch({
-        type: 'CLEAR_CART',
-    })
-    return {state, addToCart, removeFromCart, clearCart}
-}
+  const [selectedProducts, setSelectedProducts] = useState(cartInitialState);
 
-export function CartProvider ({children}){
-    const {state, addToCart, removeFromCart, clearCart}= useCartReducer()
+  useEffect(() => {
+    localStorage.setItem("products", JSON.stringify(selectedProducts));
+  }, [selectedProducts]);
 
-    return(
-        <CartContext.Provider value={{
-            cart: state, 
-            addToCart, 
-            clearCart,
-            removeFromCart 
-        }}>
-            {children}
-        </CartContext.Provider>
-    )
+  return (
+    <CartContext.Provider
+      value={{
+        selectedProducts,
+        setSelectedProducts,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 }

@@ -1,22 +1,21 @@
 import React from "react";
 import "./App.css";
-import ProductsList from "./components/ProductsList";
 import Header from "./components/Header";
-import SearchBar from "./components/SearchBar";
+import { CartProvider } from "./context/cart";
 import { ProductsProvider } from "./context/products";
-import { FilteredProvider } from "./context/filters";
+
 import { Router } from "./router";
+import CartCounter from "./components/CartCounter";
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <ProductsProvider>
-        <FilteredProvider>
-        <SearchBar/>
-      <Router/>
-      </FilteredProvider>
-      </ProductsProvider>
+      <CartProvider>
+        <Header />
+        <ProductsProvider>
+          <Router />
+        </ProductsProvider>
+      </CartProvider>
     </div>
   );
 }

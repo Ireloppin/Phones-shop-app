@@ -1,16 +1,16 @@
-import React from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
-import ProductsList from './components/ProductsList';
-import ProductDetail from './components/ProductDetail';
-
-
+import React from "react";
+import { HashRouter, Routes, Route } from "react-router-dom";
+import ProductsHome from "./components/ProductsHome";
+import ProductDetail from "./components/ProductDetail";
+import Cart from "./components/Cart";
 
 export const Router = () => {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={<ProductsList />} />
+        <Route path="/" element={<ProductsHome />} />
         <Route path="product/:id" element={<ProductDetail />} />
+        <Route path="cart/" element={<Cart />} />
       </Routes>
     </HashRouter>
   );
