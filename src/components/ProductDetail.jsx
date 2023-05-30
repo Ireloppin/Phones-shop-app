@@ -11,8 +11,15 @@ const ProductDetail = () => {
   const selectedProduct = products.filter((item) => item.id === data.id);
   const handleAddToCart = (id) => {
     const newSelected = products.filter((item) => item.id === id);
-
-    setSelectedProducts([...selectedProducts, newSelected[0]]);
+    const updatedSelected = { ...newSelected[0], quantity: 1 };
+    const productInCart = selectedProducts.findIndex((item) => item.id === id);
+    if (productInCart >= 0) {
+      const newCart = structuredClone(selectedProducts);
+      newCart[productInCart].quantity += 1;
+      setSelectedProducts(newCart);
+    } else {
+      setSelectedProducts([...selectedProducts, updatedSelected]);
+    }
   };
 
   return (

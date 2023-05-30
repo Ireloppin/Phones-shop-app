@@ -5,10 +5,15 @@ import { Link } from "react-router-dom";
 const CartCounter = () => {
   const { selectedProducts } = useContext(CartContext);
   console.log(selectedProducts);
+
+  let totalProducts = 0;
+  selectedProducts.map((item) => {
+    totalProducts += Number(item.quantity);
+  });
   return (
     <>
       <Link to={"/cart/"}>See cart</Link>
-      <p>Products in cart: {selectedProducts.length}</p>
+      <p>Products in cart: {totalProducts}</p>
     </>
   );
 };

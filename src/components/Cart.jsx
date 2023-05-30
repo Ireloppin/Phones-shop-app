@@ -5,8 +5,13 @@ const Cart = () => {
   const { selectedProducts, setSelectedProducts } = useContext(CartContext);
   let total = 0;
   selectedProducts.map((item) => {
-    total += Number(item.price);
+    total += Number(item.price * item.quantity);
   });
+
+  const handleDelete = (id) => {
+    const updatedProducts = selectedProducts.filter((item) => item.id !== id);
+    setSelectedProducts(updatedProducts);
+  };
   return (
     <>
       <h1>Cart</h1>
@@ -19,6 +24,12 @@ const Cart = () => {
                 <td>{product.model}</td>
                 <td>{product.brand}</td>
                 <td>{product.price}€</td>
+                <td>{product.quantity}Uds</td>
+                <td>
+                  <button onClick={() => handleDelete(product.id)}>
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
       </table>
