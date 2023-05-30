@@ -1,12 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 
 const Header = () => {
   return (
+
     <Container>
-        <H1>Phone Shop</H1>
-        
+     
+        <H1><a href="/">Phone Shop</a></H1>
+ 
     </Container>
   )
 }

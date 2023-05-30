@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import { ProductsProvider } from "./context/products";
 import { FilteredProvider } from "./context/filters";
+import { Router } from "./router";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <ProductsProvider>
         <FilteredProvider>
         <SearchBar/>
-      <ProductsList />
+      <Router/>
       </FilteredProvider>
       </ProductsProvider>
     </div>

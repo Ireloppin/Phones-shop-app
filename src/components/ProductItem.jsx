@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 
@@ -12,6 +13,7 @@ const ProductItem = ({product}) => {
   return (
     <>
          <Li>
+            <Link to={`/product/${product.id}`}>
           <Img src="https://i.dummyjson.com/data/products/2/1.jpg" alt={product.id}></Img> 
             <H3> {product.model}</H3>
             <P>Brand: <Span>{product.brand}</Span></P>
@@ -19,6 +21,7 @@ const ProductItem = ({product}) => {
             <button onClick={()=> handleAddToCart(product.id)}>
                 Add to Cart
             </button> 
+            </Link>
         </Li>
     </>
   )
