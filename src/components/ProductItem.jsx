@@ -28,6 +28,7 @@ export default ProductItem;
 
 const Li = styled.li`
   background-color: whitesmoke;
+  border: solid 3px #9ba4b5;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
