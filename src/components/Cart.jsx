@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/cart";
 import styled from "styled-components";
+import Breadcrumbs from "./Breadcrumbs";
 
 const Cart = () => {
   const { selectedProducts, setSelectedProducts } = useContext(CartContext);
@@ -15,7 +16,7 @@ const Cart = () => {
   };
   return (
     <>
-      <h2>Cart</h2>
+      <Breadcrumbs />
       <H3>Products in cart: {selectedProducts.length}</H3>
       <Table>
         {selectedProducts.length <= 0

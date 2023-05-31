@@ -4,6 +4,7 @@ import { ProductsContext } from "../context/products";
 import { singleProduct } from "../mocks/singleProduct.json";
 import { CartContext } from "../context/cart";
 import styled from "styled-components";
+import Breadcrumbs from "./Breadcrumbs";
 
 const ProductDetail = () => {
   const { selectedProducts, setSelectedProducts } = useContext(CartContext);
@@ -25,6 +26,7 @@ const ProductDetail = () => {
 
   return (
     <>
+      <Breadcrumbs />
       <Button>
         <Link to={"/"}>Back to all Products</Link>
       </Button>

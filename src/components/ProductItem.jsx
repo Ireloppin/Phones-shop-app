@@ -33,11 +33,13 @@ const Li = styled.li`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  text-align: center;
   padding: 2rem 1rem;
   border-radius: 1rem;
+  min-width: 10rem;
 `;
 const Img = styled.img`
-  max-width: 12rem;
+  max-width: 100%;
   border-radius: 1rem;
 `;
 

@@ -4,11 +4,13 @@ import SearchBar from "./SearchBar";
 import ProductsList from "./ProductsList";
 import CartCounter from "./CartCounter";
 import styled from "styled-components";
+import Breadcrumbs from "./Breadcrumbs";
 
 const ProductsHome = () => {
   return (
     <div>
       <FilteredProvider>
+        <Breadcrumbs />
         <Container>
           <CartCounter />
           <SearchBar />
@@ -31,4 +33,9 @@ const Container = styled.section`
   flex-wrap: wrap;
   gap: 2rem;
   margin-bottom: 2rem;
+
+  @media (max-width: 900px) {
+    gap: 0;
+    justify-content: space-around;
+  }
 `;

@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 const CartCounter = () => {
   const { selectedProducts } = useContext(CartContext);
-  console.log(selectedProducts);
 
   let totalProducts = 0;
   selectedProducts.map((item) => {

@@ -41,8 +41,6 @@ const SearchBar = () => {
 export default SearchBar;
 
 const Container = styled.div`
-  border: solid 3px #9ba4b5;
-  background-color: #9ba4b5;
   padding: 0 2rem;
   border-radius: 1rem;
   display: flex;

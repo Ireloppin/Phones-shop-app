@@ -36,4 +36,15 @@ const Ul = styled.ul`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 850px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 550px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
