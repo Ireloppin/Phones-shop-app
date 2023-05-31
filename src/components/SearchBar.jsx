@@ -1,23 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
-import { ProductsContext } from "../context/products";
-import { FilteredContext } from "../context/filters";
 import useFilter from "../hooks/useFilter";
 import styled from "styled-components";
+import { useDebounce } from "use-debounce";
 
 const SearchBar = () => {
-  const { products } = useContext(ProductsContext);
-  const { setFiltered } = useContext(FilteredContext);
   const [filter, setFilter] = useState("");
   const { filterProducts } = useFilter();
+  const [debounceFilter] = useDebounce(filter, 500);
 
   useEffect(() => {
     filterProducts({ filter });
-  }, [filter]);
-
-  const handleReset = () => {
-    setFilter("");
-    setFiltered(products);
-  };
+  }, [debounceFilter]);
 
   return (
     <Container>
@@ -30,7 +23,6 @@ const SearchBar = () => {
           onChange={(e) => setFilter(e.target.value)}
         ></Input>
       </Form>
-      <Button onClick={handleReset}>Reset Filter</Button>
     </Container>
   );
 };
@@ -48,8 +40,8 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
-  max-width: 70%;
-  margin: 1rem auto;
+  max-width: 100%;
+  float: right;
 `;
 
 const Label = styled.label`

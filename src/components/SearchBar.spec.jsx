@@ -7,10 +7,7 @@ import SearchBar from "../components/SearchBar";
 describe("<SearchBar />", () => {
   const setProducts = jest.fn();
   const setFiltered = jest.fn();
-  const products = [
-    { brand: "Brand1", model: "Model1" },
-    { brand: "Brand2", model: "Model2" },
-  ];
+  const products = [{ brand: "Brand1", model: "Model1" }];
 
   it("renders correctly", () => {
     render(
@@ -22,9 +19,6 @@ describe("<SearchBar />", () => {
     );
 
     expect(screen.getByLabelText("Filter by")).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: /Reset Filter/i })
-    ).toBeInTheDocument();
   });
 
   it("filters the products correctly", () => {
@@ -53,8 +47,6 @@ describe("<SearchBar />", () => {
         </FilteredContext.Provider>
       </ProductsContext.Provider>
     );
-
-    fireEvent.click(screen.getByRole("button", { name: /Reset Filter/i }));
 
     expect(setFiltered).toHaveBeenCalledWith(products);
   });

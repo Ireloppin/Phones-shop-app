@@ -11,7 +11,7 @@ const ProductsList = () => {
       <Products>
         <Ul>
           {filtered.length <= 0 ? (
-            <P>"No hay resultados para esta búsqueda"</P>
+            <P>"No results for this search"</P>
           ) : (
             filtered
               .slice(0, 20)

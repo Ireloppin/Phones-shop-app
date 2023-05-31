@@ -1,38 +1,46 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/cart";
 import styled from "styled-components";
-import Breadcrumbs from "./Breadcrumbs";
+import { Link } from "react-router-dom";
+import useCart from "../hooks/useCart";
+import Header from "./Header";
 
 const Cart = () => {
+  const { deleteFromCart } = useCart();
   const { selectedProducts, setSelectedProducts } = useContext(CartContext);
   let total = 0;
   selectedProducts.map((item) => {
     total += Number(item.price * item.quantity);
   });
+  let totalProducts = 0;
+  selectedProducts.map((item) => {
+    totalProducts += Number(item.quantity);
+  });
 
-  const handleDelete = (id) => {
-    const updatedProducts = selectedProducts.filter((item) => item.id !== id);
-    setSelectedProducts(updatedProducts);
-  };
   return (
     <>
-      <Breadcrumbs />
-      <H3>Products in cart: {selectedProducts.length}</H3>
+      <Header />
+      <Button>
+        <Link to={"/"}>Back to all Products</Link>
+      </Button>
+      <H3>Products in cart: {totalProducts}</H3>
       <Table>
         {selectedProducts.length <= 0
-          ? "No hay nada en el carrito"
+          ? "Cart is empty"
           : selectedProducts.map((product) => (
-              <tr key={product.id}>
+              <Tr key={product.id}>
                 <Td>{product.model}</Td>
                 <Td>{product.brand}</Td>
                 <Td>{product.price}€</Td>
+                <Td>Color: {product.options.color}</Td>
+                <Td>Storage: {product.options.storage}</Td>
                 <Td>{product.quantity}Uds</Td>
                 <Td>
-                  <button onClick={() => handleDelete(product.id)}>
+                  <Button onClick={() => deleteFromCart(product.id)}>
                     Delete
-                  </button>
+                  </Button>
                 </Td>
-              </tr>
+              </Tr>
             ))}
       </Table>
       <h3>Total: {total}€</h3>
@@ -42,14 +50,41 @@ const Cart = () => {
 
 export default Cart;
 
+const LinksContainer = styled.section`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 4rem;
+
+  @media (max-width: 500px) {
+    margin-bottom: 2rem;
+  }
+`;
+const Button = styled.button`
+  background-color: #9ba4b5;
+  color: whitesmoke;
+
+  &:hover {
+    background-color: whitesmoke;
+    color: #212a3e;
+  }
+`;
+
 const H3 = styled.h3`
-  margin: 0.8rem 0;
+  margin: 2rem 0;
   color: #212a3e;
 `;
 
 const Table = styled.table`
-  background-color: #9ba4b5;
+  border: solid 3px #9ba4b5;
   margin: 2rem 0;
+`;
+
+const Tr = styled.tr`
+  border: solid 3px #9ba4b5;
 `;
 
 const Td = styled.td`

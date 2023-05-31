@@ -1,32 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ProductsContext } from "../context/products";
 import { singleProduct } from "../mocks/singleProduct.json";
-import { CartContext } from "../context/cart";
 import styled from "styled-components";
-import Breadcrumbs from "./Breadcrumbs";
+import useCart from "../hooks/useCart";
+import Header from "./Header";
 
 const ProductDetail = () => {
-  const { selectedProducts, setSelectedProducts } = useContext(CartContext);
+  const { addToCart } = useCart();
   const data = useParams();
   const { products } = useContext(ProductsContext);
   const selectedProduct = products.filter((item) => item.id === data.id);
-  const handleAddToCart = (id) => {
-    const newSelected = products.filter((item) => item.id === id);
-    const updatedSelected = { ...newSelected[0], quantity: 1 };
-    const productInCart = selectedProducts.findIndex((item) => item.id === id);
-    if (productInCart >= 0) {
-      const newCart = structuredClone(selectedProducts);
-      newCart[productInCart].quantity += 1;
-      setSelectedProducts(newCart);
-    } else {
-      setSelectedProducts([...selectedProducts, updatedSelected]);
-    }
-  };
-
+  const [options, setOptions] = useState({
+    color: singleProduct.options.colors[0].name,
+    storage: singleProduct.options.storages[0].name,
+  });
   return (
     <>
-      <Breadcrumbs />
+      <Header />
       <Button>
         <Link to={"/"}>Back to all Products</Link>
       </Button>
@@ -55,19 +46,31 @@ const ProductDetail = () => {
           </Div>
           <Div>
             <H3>Select your favorites options</H3>
-            <Select>
+            <Select
+              onChange={(e) =>
+                setOptions({ ...options, color: e.target.value })
+              }
+            >
               {singleProduct.options.colors.map((option) => (
-                <option key={option.code}>{option.name}</option>
+                <option key={option.code} value={option.name}>
+                  {option.name}
+                </option>
               ))}
             </Select>
-            <Select>
+            <Select
+              onChange={(e) =>
+                setOptions({ ...options, storage: e.target.value })
+              }
+            >
               {singleProduct.options.storages.map((option) => (
-                <option key={option.code}>{option.name}</option>
+                <option value={option.name} key={option.code}>
+                  {option.name}
+                </option>
               ))}
             </Select>
             <Button
               id="add-to-cart-button"
-              onClick={() => handleAddToCart(selectedProduct[0].id)}
+              onClick={() => addToCart(selectedProduct[0].id, options)}
             >
               <Link to={"/"}>Add to Cart</Link>
             </Button>
@@ -118,6 +121,7 @@ const Select = styled.select`
 const Button = styled.button`
   background-color: #9ba4b5;
   color: whitesmoke;
+  margin-top: 1rem;
 
   &:hover {
     background-color: whitesmoke;
