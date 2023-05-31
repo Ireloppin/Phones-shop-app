@@ -5,8 +5,8 @@ import styled from "styled-components";
 const ProductItem = ({ product }) => {
   return (
     <>
-      <Li>
-        <Link to={`/product/${product.id}`}>
+      <Link to={`/product/${product.id}`}>
+        <Li>
           <Img
             src="https://i.dummyjson.com/data/products/2/1.jpg"
             alt={product.id}
@@ -18,8 +18,8 @@ const ProductItem = ({ product }) => {
           <P>
             Precio: <Span>{product.price}</Span>€
           </P>
-        </Link>
-      </Li>
+        </Li>
+      </Link>
     </>
   );
 };
@@ -37,6 +37,7 @@ const Li = styled.li`
   padding: 2rem 1rem;
   border-radius: 1rem;
   min-width: 10rem;
+  height: 80%;
 `;
 const Img = styled.img`
   max-width: 100%;

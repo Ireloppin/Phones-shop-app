@@ -9,6 +9,10 @@ export function CartProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem("products", JSON.stringify(selectedProducts));
+    clearTimeout();
+    setTimeout(() => {
+      localStorage.removeItem("products");
+    }, 1000 * 60 * 60);
   }, [selectedProducts]);
 
   return (

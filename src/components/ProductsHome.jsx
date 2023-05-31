@@ -10,11 +10,11 @@ const ProductsHome = () => {
   return (
     <div>
       <FilteredProvider>
-        <Breadcrumbs />
         <Container>
+          <Breadcrumbs />
           <CartCounter />
-          <SearchBar />
         </Container>
+        <SearchBar />
         <ProductsList />
       </FilteredProvider>
     </div>
@@ -24,18 +24,15 @@ const ProductsHome = () => {
 export default ProductsHome;
 
 const Container = styled.section`
-  background-color: #9ba4b5;
-  border-radius: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 
-  @media (max-width: 900px) {
-    gap: 0;
-    justify-content: space-around;
+  @media (max-width: 500px) {
+    margin-bottom: 2rem;
   }
 `;

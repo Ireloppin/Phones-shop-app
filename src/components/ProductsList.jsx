@@ -10,13 +10,15 @@ const ProductsList = () => {
     <>
       <Products>
         <Ul>
-          {filtered.length <= 0
-            ? "No hay resultados para esta búsqueda"
-            : filtered
-                .slice(0, 20)
-                .map((product) => (
-                  <ProductItem product={product} key={product.id} />
-                ))}
+          {filtered.length <= 0 ? (
+            <P>"No hay resultados para esta búsqueda"</P>
+          ) : (
+            filtered
+              .slice(0, 20)
+              .map((product) => (
+                <ProductItem product={product} key={product.id} />
+              ))
+          )}
         </Ul>
       </Products>
     </>
@@ -47,4 +49,10 @@ const Ul = styled.ul`
     display: flex;
     flex-direction: column;
   }
+`;
+
+const P = styled.p`
+  font-size: 2rem;
+  grid-column: 1/4;
+  margin-top: 2rem;
 `;

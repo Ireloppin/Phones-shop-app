@@ -13,7 +13,6 @@ const CartCounter = () => {
   return (
     <Link to={"/cart/"}>
       <Container>
-        <H3> See cart </H3>
         <H4>Products in cart: {totalProducts}</H4>
       </Container>
     </Link>
@@ -25,14 +24,16 @@ export default CartCounter;
 const Container = styled.div`
   border: solid 3px #9ba4b5;
   background-color: #9ba4b5;
-  padding: 0 2rem;
   border-radius: 1rem;
 `;
-const H3 = styled.h3`
-  margin: 1rem 0;
-  color: whitesmoke;
-`;
+
 const H4 = styled.h4`
-  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  margin: 1rem;
   color: whitesmoke;
+
+  @media (max-width: 500px) {
+    font-size: 1rem;
+    margin: 1rem;
+  }
 `;

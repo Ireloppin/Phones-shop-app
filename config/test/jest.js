@@ -5,6 +5,6 @@ export default {
     "^.+\\.(js|jsx)$": "babel-jest",
   },
   testEnvironment: "jsdom",
-  setupFilesAfterEnv: ["<rootDir>/config/test/jest.js"],
+  setupFilesAfterEnv: ["<rootDir>/config/test/setup-after.js"],
   restoreMocks: true,
 };

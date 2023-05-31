@@ -3,9 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import { CartProvider } from "./context/cart";
 import { ProductsProvider } from "./context/products";
-
 import { Router } from "./router";
-import CartCounter from "./components/CartCounter";
 
 function App() {
   return (

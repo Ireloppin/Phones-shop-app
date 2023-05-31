@@ -65,7 +65,10 @@ const ProductDetail = () => {
                 <option key={option.code}>{option.name}</option>
               ))}
             </Select>
-            <Button onClick={() => handleAddToCart(selectedProduct[0].id)}>
+            <Button
+              id="add-to-cart-button"
+              onClick={() => handleAddToCart(selectedProduct[0].id)}
+            >
               <Link to={"/"}>Add to Cart</Link>
             </Button>
           </Div>

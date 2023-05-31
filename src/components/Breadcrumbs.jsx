@@ -25,10 +25,7 @@ const Breadcrumbs = () => {
 
 export default Breadcrumbs;
 
-const Section = styled.section`
-  max-width: 1200px;
-  margin: 20px auto;
-`;
+const Section = styled.section``;
 
 const Div = styled.div`
   display: flex;

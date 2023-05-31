@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Header = () => {
@@ -19,5 +18,9 @@ const H1 = styled.h1`
 `;
 const Container = styled.header`
   margin: 0 auto;
-  padding: 4rem 0;
+  padding: 4rem 0 1rem;
+
+  @media (max-width: 500px) {
+    padding: 2rem 0;
+  }
 `;
