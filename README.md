@@ -1,18 +1,12 @@
 # Phones-shop-app
 
 //To run the application
-
-From terminal
-////
 npm run start
-////
 
 //To see the published project
-
 https://ireloppin.github.io/Phones-shop-app/
 
 //Notes
-
 The project is a SPA for phones ecommerce. The home page shows the list of products and the number of products in the shopping cart. You can also filter by product name or brand.
 
 ![image](https://github.com/Ireloppin/Phones-shop-app/assets/111697773/df2587e0-475c-4402-9258-3edb835ef284)
