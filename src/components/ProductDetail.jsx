@@ -5,16 +5,38 @@ import { singleProduct } from "../mocks/singleProduct.json";
 import styled from "styled-components";
 import useCart from "../hooks/useCart";
 import Header from "./Header";
+import { ProductDetail } from "../model/productDetail";
 
-const ProductDetail = () => {
+const ProductDetailPage = () => {
+  const product = new ProductDetail({
+    id: singleProduct.id,
+    brand: singleProduct.brand,
+    model: singleProduct.model,
+    price: singleProduct.price,
+    imageUrl: singleProduct.imgUrl,
+    cpu: singleProduct.cpu,
+    ram: singleProduct.ram,
+    os: singleProduct.os,
+    displayResolution: singleProduct.displayResolution,
+    battery: singleProduct.battery,
+    primaryCamera: singleProduct.primaryCamera,
+    secondaryCamera: singleProduct.secondaryCmera,
+    dimentions: singleProduct.dimentions,
+    weight: singleProduct.weight,
+    colors: singleProduct.options.colors,
+    storages: singleProduct.options.storages,
+    options: singleProduct.options,
+  });
+
   const { addToCart } = useCart();
   const data = useParams();
   const { products } = useContext(ProductsContext);
   const selectedProduct = products.filter((item) => item.id === data.id);
   const [options, setOptions] = useState({
-    color: singleProduct.options.colors[0].name,
-    storage: singleProduct.options.storages[0].name,
+    color: product.colors[0].name,
+    storage: product.storages[0].name,
   });
+
   return (
     <>
       <Header />
@@ -24,25 +46,25 @@ const ProductDetail = () => {
       <Container>
         <Img
           src="https://i.dummyjson.com/data/products/2/1.jpg"
-          alt={singleProduct.model}
+          alt={product.model}
         ></Img>
         <section>
           <Div>
             <H3>{selectedProduct[0].model}</H3>
             <H3>Brand: {selectedProduct[0].brand}</H3>
             <H3>Price: {selectedProduct[0].price}€</H3>
-            <P>CPU: {singleProduct.cpu}</P>
-            <P>RAM: {singleProduct.ram}</P>
-            <P>OS: {singleProduct.os[0]}</P>
-            <P>Display Resolution: {singleProduct.displayResolution}</P>
-            <P>Battery: {singleProduct.battery}</P>
+            <P>CPU: {product.cpu}</P>
+            <P>RAM: {product.ram}</P>
+            <P>OS: {product.os}</P>
+            <P>Display Resolution: {product.displayResolution}</P>
+            <P>Battery: {product.battery}</P>
             <P>
               Cameras:
-              <span>Primary Camera: {singleProduct.primaryCamera}</span>
-              <span>Second Camera: {singleProduct.secondaryCmera}</span>
+              <span>Primary Camera: {product.primaryCamera}</span>
+              <span>Second Camera: {product.secondaryCamera}</span>
             </P>
-            <P>Dimentions: {singleProduct.dimentions}</P>
-            <P>Weight: {singleProduct.weight}</P>
+            <P>Dimentions: {product.dimentions}</P>
+            <P>Weight: {product.weight}</P>
           </Div>
           <Div>
             <H3>Select your favorites options</H3>
@@ -81,7 +103,7 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail;
+export default ProductDetailPage;
 
 const Container = styled.section`
   display: grid;
