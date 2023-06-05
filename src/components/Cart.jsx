@@ -25,23 +25,25 @@ const Cart = () => {
       </Button>
       <H3>Products in cart: {totalProducts}</H3>
       <Table>
-        {selectedProducts.length <= 0
-          ? "Cart is empty"
-          : selectedProducts.map((product) => (
-              <Tr key={product.id}>
-                <Td>{product.model}</Td>
-                <Td>{product.brand}</Td>
-                <Td>{product.price}€</Td>
-                <Td>Color: {product.options.color}</Td>
-                <Td>Storage: {product.options.storage}</Td>
-                <Td>{product.quantity}Uds</Td>
-                <Td>
-                  <Button onClick={() => deleteFromCart(product.id)}>
-                    Delete
-                  </Button>
-                </Td>
-              </Tr>
-            ))}
+        <tbody>
+          {selectedProducts.length <= 0
+            ? "Cart is empty"
+            : selectedProducts.map((product) => (
+                <Tr key={product.id}>
+                  <Td>{product.model}</Td>
+                  <Td>{product.brand}</Td>
+                  <Td>{product.price}€</Td>
+                  <Td>Color: {product.options.color}</Td>
+                  <Td>Storage: {product.options.storage}</Td>
+                  <Td>{product.quantity}Uds</Td>
+                  <Td>
+                    <Button onClick={() => deleteFromCart(product.id)}>
+                      Delete
+                    </Button>
+                  </Td>
+                </Tr>
+              ))}
+        </tbody>
       </Table>
       <h3>Total: {total}€</h3>
     </>
