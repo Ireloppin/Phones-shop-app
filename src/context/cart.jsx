@@ -21,23 +21,6 @@ export function CartProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem("products", JSON.stringify(selectedProducts));
-
-    /*   const hours = 1;
-    const now = new Date().getTime();
-    var setupTime = localStorage.getItem("setupTime");
-    if (setupTime == null) {
-      localStorage.setItem("setupTime", now);
-    } else {
-      if (now - setupTime > hours * 60 * 60) {
-        localStorage.removeItem("products");
-        localStorage.setItem("setupTime", now);
-      }
-    } */
-
-    /*  clearTimeout();
-    setTimeout(() => {
-      localStorage.removeItem("products");
-    }, 1000 * 60 * 60); */
   }, [selectedProducts]);
 
   return (
