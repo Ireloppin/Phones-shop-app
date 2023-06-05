@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import { ProductsContext } from "../context/products";
-import { FilteredContext } from "../context/filters";
+
 import SearchBar from "../components/SearchBar";
 
 const MockProductsProvider = ({ children }) => {
@@ -18,12 +18,12 @@ const MockProductsProvider = ({ children }) => {
 };
 
 const MockFilteredProvider = ({ children }) => {
-  const setFiltered = jest.fn(); // Create a mock function for setFiltered
+  const setFiltered = jest.fn();
 
   return (
-    <FilteredContext.Provider value={{ setFiltered }}>
+    <ProductsContext.Provider value={{ setFiltered }}>
       {children}
-    </FilteredContext.Provider>
+    </ProductsContext.Provider>
   );
 };
 

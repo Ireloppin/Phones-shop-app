@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
-import { FilteredContext } from "../context/filters";
+import { ProductsContext } from "../context/products";
 import ProductItem from "./ProductItem";
 import styled from "styled-components";
 
 const ProductsList = () => {
-  const { filtered, setFiltered } = useContext(FilteredContext);
-
+  const { filtered } = useContext(ProductsContext);
   return (
     <>
       <Products>

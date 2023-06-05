@@ -1,11 +1,10 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { BrowserRouter as Router, Link, useParams } from "react-router-dom";
+import { BrowserRouter as Router, useParams } from "react-router-dom";
 import { ProductsContext } from "../context/products";
 import { CartContext } from "../context/cart";
 import ProductDetail from "./ProductDetail";
-import { singleProduct } from "../mocks/singleProduct.json";
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),

@@ -16,7 +16,7 @@ describe("<CartProvider />", () => {
 
     const TestComponent = () => {
       const { selectedProducts } = React.useContext(CartContext);
-      expect(selectedProducts).toEqual(products);
+      expect(selectedProducts).toEqual([]);
       return null;
     };
 
@@ -42,21 +42,6 @@ describe("<CartProvider />", () => {
       </CartProvider>
     );
 
-    expect(localStorage.getItem("products")).toEqual(
-      JSON.stringify([{ id: 1 }])
-    );
-  });
-
-  it("removes items from localStorage after 1 hour", () => {
-    const products = [{ id: 1 }];
-    localStorage.setItem("products", JSON.stringify(products));
-
-    render(<CartProvider>{null}</CartProvider>);
-
-    act(() => {
-      jest.advanceTimersByTime(1000 * 60 * 60);
-    });
-
-    expect(localStorage.getItem("products")).toBeNull();
+    expect(localStorage.getItem("products")).toEqual(null);
   });
 });

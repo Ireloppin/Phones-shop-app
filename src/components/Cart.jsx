@@ -7,7 +7,7 @@ import Header from "./Header";
 
 const Cart = () => {
   const { deleteFromCart } = useCart();
-  const { selectedProducts, setSelectedProducts } = useContext(CartContext);
+  const { selectedProducts } = useContext(CartContext);
   let total = 0;
   selectedProducts.map((item) => {
     total += Number(item.price * item.quantity);

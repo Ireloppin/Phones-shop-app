@@ -1,6 +1,5 @@
 import React from "react";
 import { render, fireEvent, screen, act } from "@testing-library/react";
-import { FilteredContext } from "../context/filters";
 import { ProductsContext } from "../context/products";
 import SearchBar from "../components/SearchBar";
 
@@ -11,10 +10,10 @@ describe("<SearchBar />", () => {
 
   it("renders correctly", () => {
     render(
-      <ProductsContext.Provider value={{ products, setProducts }}>
-        <FilteredContext.Provider value={{ filtered: products, setFiltered }}>
-          <SearchBar />
-        </FilteredContext.Provider>
+      <ProductsContext.Provider
+        value={{ products, setProducts, filtered: products, setFiltered }}
+      >
+        <SearchBar />
       </ProductsContext.Provider>
     );
 
@@ -23,10 +22,10 @@ describe("<SearchBar />", () => {
 
   it("filters the products correctly", () => {
     render(
-      <ProductsContext.Provider value={{ products, setProducts }}>
-        <FilteredContext.Provider value={{ filtered: products, setFiltered }}>
-          <SearchBar />
-        </FilteredContext.Provider>
+      <ProductsContext.Provider
+        value={{ products, setProducts, filtered: products, setFiltered }}
+      >
+        <SearchBar />
       </ProductsContext.Provider>
     );
 
@@ -41,10 +40,10 @@ describe("<SearchBar />", () => {
 
   it("resets the filter correctly", () => {
     render(
-      <ProductsContext.Provider value={{ products, setProducts }}>
-        <FilteredContext.Provider value={{ filtered: products, setFiltered }}>
-          <SearchBar />
-        </FilteredContext.Provider>
+      <ProductsContext.Provider
+        value={{ products, setProducts, filtered: products, setFiltered }}
+      >
+        <SearchBar />
       </ProductsContext.Provider>
     );
 

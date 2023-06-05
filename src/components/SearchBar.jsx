@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import useFilter from "../hooks/useFilter";
 import styled from "styled-components";
 import { useDebounce } from "use-debounce";
