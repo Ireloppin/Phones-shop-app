@@ -1,41 +1,26 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ProductsContext } from "../context/products";
 import { singleProduct } from "../mocks/singleProduct.json";
 import styled from "styled-components";
 import useCart from "../hooks/useCart";
 import Header from "./Header";
-import { ProductDetail } from "../model/productDetail";
+import { ProductDetailDataUseCase } from "../usecases/product-detail.usecase";
 
 const ProductDetailPage = () => {
-  const product = new ProductDetail({
-    id: singleProduct.id,
-    brand: singleProduct.brand,
-    model: singleProduct.model,
-    price: singleProduct.price,
-    imageUrl: singleProduct.imgUrl,
-    cpu: singleProduct.cpu,
-    ram: singleProduct.ram,
-    os: singleProduct.os,
-    displayResolution: singleProduct.displayResolution,
-    battery: singleProduct.battery,
-    primaryCamera: singleProduct.primaryCamera,
-    secondaryCamera: singleProduct.secondaryCmera,
-    dimentions: singleProduct.dimentions,
-    weight: singleProduct.weight,
-    colors: singleProduct.options.colors,
-    storages: singleProduct.options.storages,
-    options: singleProduct.options,
-  });
-
   const { addToCart } = useCart();
+  const [product, setProduct] = useState(null);
   const data = useParams();
   const { products } = useContext(ProductsContext);
   const selectedProduct = products.filter((item) => item.id === data.id);
-  const [options, setOptions] = useState({
-    color: product.colors[0].name,
-    storage: product.storages[0].name,
-  });
+  const [options, setOptions] = useState({});
+  async function getData() {
+    const data = await ProductDetailDataUseCase.execute();
+    setProduct(data);
+  }
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <>
@@ -44,60 +29,66 @@ const ProductDetailPage = () => {
         <Link to={"/"}>Back to all Products</Link>
       </Button>
       <Container>
-        <Img
-          src="https://i.dummyjson.com/data/products/2/1.jpg"
-          alt={product.model}
-        ></Img>
-        <section>
-          <Div>
-            <H3>{selectedProduct[0].model}</H3>
-            <H3>Brand: {selectedProduct[0].brand}</H3>
-            <H3>Price: {selectedProduct[0].price}€</H3>
-            <P>CPU: {product.cpu}</P>
-            <P>RAM: {product.ram}</P>
-            <P>OS: {product.os}</P>
-            <P>Display Resolution: {product.displayResolution}</P>
-            <P>Battery: {product.battery}</P>
-            <P>
-              Cameras:
-              <span>Primary Camera: {product.primaryCamera}</span>
-              <span>Second Camera: {product.secondaryCamera}</span>
-            </P>
-            <P>Dimentions: {product.dimentions}</P>
-            <P>Weight: {product.weight}</P>
-          </Div>
-          <Div>
-            <H3>Select your favorites options</H3>
-            <Select
-              onChange={(e) =>
-                setOptions({ ...options, color: e.target.value })
-              }
-            >
-              {singleProduct.options.colors.map((option) => (
-                <option key={option.code} value={option.name}>
-                  {option.name}
-                </option>
-              ))}
-            </Select>
-            <Select
-              onChange={(e) =>
-                setOptions({ ...options, storage: e.target.value })
-              }
-            >
-              {singleProduct.options.storages.map((option) => (
-                <option value={option.name} key={option.code}>
-                  {option.name}
-                </option>
-              ))}
-            </Select>
-            <Button
-              id="add-to-cart-button"
-              onClick={() => addToCart(selectedProduct[0].id, options)}
-            >
-              <Link to={"/"}>Add to Cart</Link>
-            </Button>
-          </Div>
-        </section>
+        {product === null ? (
+          <p>"no hay datos"</p>
+        ) : (
+          <>
+            <Img
+              src="https://i.dummyjson.com/data/products/2/1.jpg"
+              alt={product.model}
+            ></Img>
+            <section>
+              <Div>
+                <H3>{selectedProduct[0].model}</H3>
+                <H3>Brand: {selectedProduct[0].brand}</H3>
+                <H3>Price: {selectedProduct[0].price}€</H3>
+                <P>CPU: {product.cpu}</P>
+                <P>RAM: {product.ram}</P>
+                <P>OS: {product.os}</P>
+                <P>Display Resolution: {product.displayResolution}</P>
+                <P>Battery: {product.battery}</P>
+                <P>
+                  Cameras:
+                  <span>Primary Camera: {product.primaryCamera}</span>
+                  <span>Second Camera: {product.secondaryCamera}</span>
+                </P>
+                <P>Dimentions: {product.dimentions}</P>
+                <P>Weight: {product.weight}</P>
+              </Div>
+              <Div>
+                <H3>Select your favorites options</H3>
+                <Select
+                  onChange={(e) =>
+                    setOptions({ ...options, color: e.target.value })
+                  }
+                >
+                  {singleProduct.options.colors.map((option) => (
+                    <option key={option.code} value={option.name}>
+                      {option.name}
+                    </option>
+                  ))}
+                </Select>
+                <Select
+                  onChange={(e) =>
+                    setOptions({ ...options, storage: e.target.value })
+                  }
+                >
+                  {singleProduct.options.storages.map((option) => (
+                    <option value={option.name} key={option.code}>
+                      {option.name}
+                    </option>
+                  ))}
+                </Select>
+                <Button
+                  id="add-to-cart-button"
+                  onClick={() => addToCart(selectedProduct[0].id, options)}
+                >
+                  <Link to={"/"}>Add to Cart</Link>
+                </Button>
+              </Div>
+            </section>
+          </>
+        )}
       </Container>
     </>
   );
